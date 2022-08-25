@@ -1,9 +1,10 @@
+import homePageImage from './contacts.jpg';
 const styles = {
   container: {
     minHeight: 'calc(100vh - 50px)',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'column',
   },
   title: {
     fontWeight: 500,
@@ -14,13 +15,16 @@ const styles = {
 
 const HomeView = () => (
   <div style={styles.container}>
+    <div>
+      <img src={homePageImage} alt="phonebook" />
+    </div>
     <h1 style={styles.title}>
       Welcome to our phonebook app!
       <span role="img" aria-label="Greeting icon">
         💁‍♀️
       </span>
-      Make yourself at home
     </h1>
+    <h2>Make yourself at home</h2>
   </div>
 );
 

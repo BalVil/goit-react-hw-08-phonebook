@@ -19,19 +19,19 @@ export const addContact = createAsyncThunk(
       const contact = await contactsAPI.addItem(newContact);
       return contact;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.response.data);
     }
   }
 );
 
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
-  async (id, { rejectWithValue }) => {
+  async (contactId, { rejectWithValue }) => {
     try {
-      const contact = await contactsAPI.deleteItem(id);
-      return contact.id;
+      await contactsAPI.deleteItem(contactId);
+      return contactId;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.response.data);
     }
   }
 );

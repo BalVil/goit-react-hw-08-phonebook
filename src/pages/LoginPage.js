@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { FormWrap, Form, Button, LabelName } from './LoginPage.styled';
 import { authOperations } from '../redux/auth';
 
-export const LoginPage = () => {
+const LoginPage = () => {
   const [inputs, setInputs] = useState({});
 
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ export const LoginPage = () => {
   const handleChange = e => {
     const nameInput = e.target.name;
     const value = e.target.value;
-    setInputs(values => ({ ...inputs, [nameInput]: value }));
+    setInputs(values => ({ ...values, [nameInput]: value }));
   };
 
   const handleSubmit = e => {
@@ -53,3 +53,4 @@ export const LoginPage = () => {
     </FormWrap>
   );
 };
+export default LoginPage;

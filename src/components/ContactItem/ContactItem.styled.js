@@ -25,6 +25,14 @@ export const ContactNumber = styled.span`
   overflow-wrap: break-word;
 `;
 
+export const EditButton = styled(Button)`
+  position: absolute;
+  right: 20%;
+  top: 50%;
+  padding: 4px 8px;
+  transform: translate(0, -50%);
+`;
+
 export const DelButton = styled(Button)`
   position: absolute;
   right: 0;

@@ -2,7 +2,7 @@ import ContactForm from 'components/ContactForm/ContactForm';
 import { ContactsWrap, Section, Title } from './ContactsPage.styled';
 import ContactList from 'components/ContactList/ContactList';
 
-export default function Contacts() {
+const Contacts = () => {
   return (
     <ContactsWrap>
       <Section>
@@ -15,4 +15,5 @@ export default function Contacts() {
       </Section>
     </ContactsWrap>
   );
-}
+};
+export default Contacts;

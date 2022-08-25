@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { FormWrap, Form, Button, LabelName } from './RegisterPage.styled';
 import { authOperations } from '../redux/auth';
 
-export const RegisterPage = () => {
+const RegisterPage = () => {
   const [inputs, setInputs] = useState({});
 
   const dispatch = useDispatch();
@@ -65,3 +65,4 @@ export const RegisterPage = () => {
     </FormWrap>
   );
 };
+export default RegisterPage;

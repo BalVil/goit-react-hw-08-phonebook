@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ContactsWrap = styled.div`
-  width: 380px;
+  width: 480px;
   padding: 16px;
   margin: 0 auto;
 `;
