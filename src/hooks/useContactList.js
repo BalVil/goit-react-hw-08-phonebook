@@ -1,19 +1,24 @@
-import { useSelector } from 'react-redux';
-import { getItems, getFilter } from 'redux/selectors';
+import { useEffect, useMemo, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getItems } from 'redux/ContactsSelectors';
+import * as contactsOperations from 'redux/contactsOperations';
 
 export const useContactList = () => {
+  const [filter, setFilter] = useState('');
   const items = useSelector(getItems);
-  const filter = useSelector(getFilter);
+  const dispatch = useDispatch();
 
-  const getFilteredContacts = (allContacts, filteredContacts) => {
-    const normalizedFilter = filteredContacts.toLowerCase();
+  useEffect(() => {
+    dispatch(contactsOperations.getContacts());
+  }, [dispatch]);
 
-    return allContacts.filter(({ name }) =>
+  const FilteredContacts = useMemo(() => {
+    const normalizedFilter = filter.toLowerCase().trim();
+
+    return items.filter(({ name }) =>
       name.toLowerCase().includes(normalizedFilter)
     );
-  };
+  }, [filter, items]);
 
-  const visibleContacts = getFilteredContacts(items, filter);
-
-  return { visibleContacts };
+  return { FilteredContacts, filter, setFilter };
 };

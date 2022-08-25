@@ -6,9 +6,7 @@ export const Contact = styled.li`
   display: flex;
   align-items: center;
   padding: 8px 4px;
-
   line-height: 1.4em;
-
   &:not(:last-child) {
     margin-bottom: 8px;
   }
@@ -31,8 +29,6 @@ export const DelButton = styled(Button)`
   position: absolute;
   right: 0;
   top: 50%;
-
   padding: 4px 8px;
-
   transform: translate(0, -50%);
 `;

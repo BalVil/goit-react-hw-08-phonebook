@@ -1,26 +1,38 @@
+import { useSelector } from 'react-redux';
 import { ContactItem } from 'components/ContactItem/ContactItem';
 import { useContactList } from 'hooks/useContactList';
+import { getIsLoading } from 'redux/ContactsSelectors';
+import { Notification } from 'components/Notification/Notification';
+// import { Spinner } from 'components/Spinner/Spinner';
+import Filter from 'components/Filter/Filter';
 
 const ContactList = () => {
-  const { visibleContacts } = useContactList();
+  const { FilteredContacts, filter, setFilter } = useContactList();
+  const isloading = useSelector(getIsLoading);
 
   return (
-    <ul>
-      {visibleContacts.length > 0 ? (
-        visibleContacts.map(({ id, name, number }) => {
-          return (
-            <ContactItem
-              key={id}
-              name={name}
-              number={number}
-              id={id}
-            ></ContactItem>
-          );
-        })
-      ) : (
-        <div>No contacts in the phonebook</div>
-      )}
-    </ul>
+    <>
+      {/* {isloading === 'fetching' && <Spinner />} */}
+      <Filter value={filter} onChange={setFilter} />
+      <ul>
+        {FilteredContacts.length > 0 ? (
+          FilteredContacts.map(({ id, name, number }) => {
+            return (
+              <ContactItem
+                key={id}
+                name={name}
+                number={number}
+                id={id}
+              ></ContactItem>
+            );
+          })
+        ) : (
+          <Notification status="warning">
+            No contacts in the phonebook
+          </Notification>
+        )}
+      </ul>
+    </>
   );
 };
 

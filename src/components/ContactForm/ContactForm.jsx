@@ -1,15 +1,16 @@
-import { Form, Button, FormLabel } from './ContactForm.styled';
+import { Form, Button, LabelName } from './ContactForm.styled';
 import { useAddContact } from 'hooks/useAddContact';
+// import { Spinner } from 'components/Spinner/Spinner';
 
 const ContactForm = () => {
-  const { name, number, handleChange, handleSubmit } = useAddContact();
+  const { inputs, handleChange, handleSubmit } = useAddContact();
 
   return (
     <Form autoComplete="off" onSubmit={handleSubmit}>
       <label htmlFor="name">
-        <FormLabel>Name</FormLabel>
+        <LabelName>Name</LabelName>
         <input
-          value={name}
+          value={inputs.name || ''}
           onChange={handleChange}
           type="text"
           name="name"
@@ -20,9 +21,9 @@ const ContactForm = () => {
         />
       </label>
       <label htmlFor="number">
-        <FormLabel>Number</FormLabel>
+        <LabelName>Phone Number</LabelName>
         <input
-          value={number}
+          value={inputs.number || ''}
           onChange={handleChange}
           type="tel"
           name="number"
@@ -32,7 +33,10 @@ const ContactForm = () => {
           required
         />
       </label>
-      <Button type="submit">Add contact</Button>
+      <Button type="submit">
+        {/* {adding && <Spinner size={18} />} */}
+        Add contact
+      </Button>
     </Form>
   );
 };

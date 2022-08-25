@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const ContactsWrap = styled.div`
   width: 380px;
   padding: 16px;
   margin: 0 auto;
 `;
+
 export const Section = styled.section`
   margin-bottom: 16px;
 `;

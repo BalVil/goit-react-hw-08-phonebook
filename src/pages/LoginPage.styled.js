@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+export const FormWrap = styled.div`
+  width: 380px;
+  padding: 16px;
+  margin: 0 auto;
+`;
+
 export const Form = styled.form`
   display: flex;
   flex-direction: column;

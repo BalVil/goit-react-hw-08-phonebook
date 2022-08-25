@@ -1,32 +1,27 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
-import { nanoid } from 'nanoid';
-import { addContact } from 'redux/contactsSlice';
-import { getItems } from 'redux/selectors';
+import { showWarning, showSuccess } from 'components/Notification/Notification';
+import { contactsActions } from 'redux/contactsSlice';
+import { getItems, getIsLoading } from 'redux/ContactsSelectors';
 
 export const useAddContact = () => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [inputs, setInputs] = useState({});
 
   const contactsItems = useSelector(getItems);
+  const isloading = useSelector(getIsLoading);
   const dispatch = useDispatch();
 
-  const handleChange = e => {
-    const { name, value } = e.target;
-
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-
-      case 'number':
-        setNumber(value);
-        break;
-
-      default:
-        return;
+  useEffect(() => {
+    if (isloading === 'addSuccess') {
+      showSuccess('Contact added');
+      dispatch(contactsActions.setIsLoading());
     }
+  }, [dispatch, isloading]);
+
+  const handleChange = e => {
+    const nameInput = e.target.name;
+    const value = e.target.value;
+    setInputs(values => ({ ...values, [nameInput]: value }));
   };
 
   const handleSubmit = e => {
@@ -34,30 +29,18 @@ export const useAddContact = () => {
 
     const sameName =
       contactsItems.findIndex(
-        item => item.name.toLowerCase() === name.toLowerCase()
+        item => item.name.toLowerCase() === inputs.name.toLowerCase()
       ) !== -1;
 
     if (sameName) {
-      toast.warn(`${name} is already in contacts `);
-      // resetForm();
+      showWarning(`${inputs.name} is already in contacts `);
       return;
     }
 
-    const newContact = {
-      id: nanoid(),
-      name,
-      number,
-    };
+    dispatch(contactsActions.addContact(inputs));
 
-    dispatch(addContact(newContact));
-
-    resetForm();
+    setInputs({});
   };
 
-  const resetForm = () => {
-    setName('');
-    setNumber('');
-  };
-
-  return { name, number, handleChange, handleSubmit };
+  return { inputs, handleChange, handleSubmit };
 };

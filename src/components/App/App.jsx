@@ -1,26 +1,24 @@
-import { GlobalStyle } from 'components/GlobalStyle';
-import { ToastContainer, Slide } from 'react-toastify';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import 'modern-normalize';
-import { Container, Section, Title } from './App.styled';
-import ContactForm from 'components/ContactForm/ContactForm';
-import ContactList from 'components/ContactList/ContactList';
-import Filter from 'components/Filter/Filter';
+// import AppBar from 'components/AppBar';
+// import Container from 'components/Container/Container';
+import SharedLayout from 'components/SharedLayout/SharedLayout';
+import Home from 'pages/Home';
+import { RegisterPage } from 'pages/RegisterPage';
+import { LoginPage } from 'pages/LoginPage';
+import ContactsPage from 'pages/ContactsPage';
 
 export const App = () => {
   return (
-    <Container>
-      <Section>
-        <Title>Phonebook</Title>
-        <ContactForm />
-      </Section>
-      <Section>
-        <h2>Contacts</h2>
-        <Filter />
-        <ContactList />
-      </Section>
-      <ToastContainer autoClose={3000} transition={Slide} />
-      <GlobalStyle />
-    </Container>
+    <Routes>
+      <Route path="/" element={<SharedLayout />}>
+        <Route index element={<Home />} />
+        <Route path="/contacts" element={<ContactsPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Route>
+    </Routes>
   );
 };
