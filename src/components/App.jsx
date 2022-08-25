@@ -1,10 +1,10 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect, Suspense, lazy } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 import 'modern-normalize';
 import SharedLayout from 'components/SharedLayout/SharedLayout';
-import { authOperations } from 'redux/auth';
+import { authOperations, authSelectors } from 'redux/auth';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 
@@ -15,54 +15,61 @@ const LoginPage = lazy(() => import('pages/LoginPage'));
 
 export const App = () => {
   const dispatch = useDispatch();
+  const isFetchingUser = useSelector(authSelectors.getIsFetchingUser);
 
   useEffect(() => {
     dispatch(authOperations.fetchCurrentUser());
   }, [dispatch]);
 
   return (
-    <Suspense fallback={<p>Loading...</p>}>
-      <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          <Route
-            index
-            element={
-              <PublicRoute>
-                <Home />
-              </PublicRoute>
-            }
-          />
+    <>
+      {isFetchingUser ? (
+        <h1>Show Skeleton MUI</h1>
+      ) : (
+        <Suspense fallback={<p>Loading...</p>}>
+          <Routes>
+            <Route path="/" element={<SharedLayout />}>
+              <Route
+                index
+                element={
+                  <PublicRoute>
+                    <Home />
+                  </PublicRoute>
+                }
+              />
 
-          <Route
-            path="/contacts"
-            element={
-              <PrivateRoute>
-                <ContactsPage />
-              </PrivateRoute>
-            }
-          />
+              <Route
+                path="/contacts"
+                element={
+                  <PrivateRoute>
+                    <ContactsPage />
+                  </PrivateRoute>
+                }
+              />
 
-          <Route
-            path="/register"
-            element={
-              <PublicRoute restricted>
-                <RegisterPage />
-              </PublicRoute>
-            }
-          />
+              <Route
+                path="/register"
+                element={
+                  <PublicRoute restricted>
+                    <RegisterPage />
+                  </PublicRoute>
+                }
+              />
 
-          <Route
-            path="/login"
-            element={
-              <PublicRoute restricted>
-                <LoginPage />
-              </PublicRoute>
-            }
-          />
+              <Route
+                path="/login"
+                element={
+                  <PublicRoute restricted redirectPath="/contacts">
+                    <LoginPage />
+                  </PublicRoute>
+                }
+              />
 
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Route>
-      </Routes>
-    </Suspense>
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Route>
+          </Routes>
+        </Suspense>
+      )}
+    </>
   );
 };
