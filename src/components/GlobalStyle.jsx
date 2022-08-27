@@ -36,7 +36,7 @@ export const GlobalStyle = createGlobalStyle`
   padding: 0;
   }
   
-  input {
+  /* input {
   display: inline-block;
   padding: 4px 8px;
   margin-bottom: 20px;
@@ -47,5 +47,5 @@ export const GlobalStyle = createGlobalStyle`
   &:focus {
     box-shadow: inset 0 0 4px rgb(0 0 0 / 8%), 0 0 8px rgba(16, 141, 243, 0.9);
   }
-}
+} */
 `;

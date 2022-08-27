@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getContacts, deleteContact, addContact } from './contactsOperations';
-import { showSuccess } from 'components/Notification/Notification';
 
 const contactsSlice = createSlice({
   name: 'contacts',
@@ -36,7 +35,6 @@ const contactsSlice = createSlice({
     [deleteContact.fulfilled]: (state, action) => {
       state.items = state.items.filter(({ id }) => id !== action.payload);
       state.isloading = false;
-      // showSuccess('Contact deleted');
     },
     [deleteContact.rejected]: (state, action) => {
       state.error = action.payload;
@@ -44,12 +42,11 @@ const contactsSlice = createSlice({
     },
 
     [addContact.pending]: (state, _) => {
-      state.isloading = true;
+      state.isloading = 'adding';
     },
     [addContact.fulfilled]: (state, action) => {
       state.items.push(action.payload);
       state.isloading = 'addSuccess';
-      // showSuccess('Contact added');
     },
     [addContact.rejected]: (state, action) => {
       state.error = action.payload;

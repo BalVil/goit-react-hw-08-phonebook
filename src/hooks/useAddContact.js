@@ -11,13 +11,6 @@ export const useAddContact = () => {
   const isloading = useSelector(getIsLoading);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (isloading === 'addSuccess') {
-      showSuccess('Contact added');
-      dispatch(contactsActions.setIsLoading());
-    }
-  }, [dispatch, isloading]);
-
   const handleChange = e => {
     const nameInput = e.target.name;
     const value = e.target.value;
@@ -42,5 +35,12 @@ export const useAddContact = () => {
     setInputs({});
   };
 
-  return { inputs, handleChange, handleSubmit };
+  useEffect(() => {
+    if (isloading === 'addSuccess') {
+      showSuccess('Contact added');
+      dispatch(contactsActions.setIsLoading());
+    }
+  }, [dispatch, isloading]);
+
+  return { inputs, handleChange, handleSubmit, isloading };
 };

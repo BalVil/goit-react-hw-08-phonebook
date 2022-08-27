@@ -1,11 +1,10 @@
-import { DebounceInput } from 'react-debounce-input';
-import { Label, LabelTitle } from './Filter.styled';
+import { Label, LabelTitle, FilterInput } from './Filter.styled';
 
 const Filter = ({ value, onChange }) => {
   return (
     <Label>
       <LabelTitle>Find contacts by name</LabelTitle>
-      <DebounceInput
+      <FilterInput
         debounceTimeout={300}
         type="text"
         value={value}

@@ -10,21 +10,17 @@ const styles = {
     fontWeight: 500,
     fontSize: 48,
     textAlign: 'center',
+    marginBottom: 8,
   },
 };
 
 const HomeView = () => (
   <div style={styles.container}>
+    <h1 style={styles.title}>Welcome to your phone book app!</h1>
+    <h2>Make yourself at home</h2>
     <div>
       <img src={homePageImage} alt="phonebook" />
     </div>
-    <h1 style={styles.title}>
-      Welcome to our phonebook app!
-      <span role="img" aria-label="Greeting icon">
-        💁‍♀️
-      </span>
-    </h1>
-    <h2>Make yourself at home</h2>
   </div>
 );
 

@@ -1,15 +1,20 @@
-import { Form, Button, LabelName } from './ContactForm.styled';
+import {
+  Form,
+  FormButton,
+  TextField,
+  Input,
+  Label,
+} from './ContactForm.styled';
 import { useAddContact } from 'hooks/useAddContact';
-// import { Spinner } from 'components/Spinner/Spinner';
+import { Spinner } from 'components/Spinner/Spinner';
 
 const ContactForm = () => {
-  const { inputs, handleChange, handleSubmit } = useAddContact();
+  const { inputs, handleChange, handleSubmit, isloading } = useAddContact();
 
   return (
     <Form autoComplete="off" onSubmit={handleSubmit}>
-      <label htmlFor="name">
-        <LabelName>Name</LabelName>
-        <input
+      <TextField>
+        <Input
           value={inputs.name || ''}
           onChange={handleChange}
           type="text"
@@ -18,11 +23,12 @@ const ContactForm = () => {
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
+          placeholder="&nbsp;"
         />
-      </label>
-      <label htmlFor="number">
-        <LabelName>Phone Number</LabelName>
-        <input
+        <Label htmlFor="name">Name</Label>
+      </TextField>
+      <TextField>
+        <Input
           value={inputs.number || ''}
           onChange={handleChange}
           type="tel"
@@ -31,12 +37,20 @@ const ContactForm = () => {
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
+          placeholder="&nbsp;"
         />
-      </label>
-      <Button type="submit">
-        {/* {adding && <Spinner size={18} />} */}
+        <Label htmlFor="password">Number</Label>
+      </TextField>
+      <FormButton
+        sx={{
+          minWidth: 100,
+        }}
+        type="submit"
+        variant="text"
+      >
+        {isloading === 'adding' && <Spinner size={18} />}
         Add contact
-      </Button>
+      </FormButton>
     </Form>
   );
 };
