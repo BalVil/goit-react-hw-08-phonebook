@@ -6,10 +6,9 @@ import {
   Label,
 } from './ContactForm.styled';
 import { useAddContact } from 'hooks/useAddContact';
-import { Spinner } from 'components/Spinner/Spinner';
 
 const ContactForm = () => {
-  const { inputs, handleChange, handleSubmit, isloading } = useAddContact();
+  const { inputs, handleChange, handleSubmit, isLoading } = useAddContact();
 
   return (
     <Form autoComplete="off" onSubmit={handleSubmit}>
@@ -47,8 +46,8 @@ const ContactForm = () => {
         }}
         type="submit"
         variant="text"
+        loading={isLoading === 'adding' ? 1 : 0}
       >
-        {isloading === 'adding' && <Spinner size={18} />}
         Add contact
       </FormButton>
     </Form>

@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 import { Notice, Icon } from './Notification.styled';
 import PropTypes from 'prop-types';
 
-export const Notification = ({ status, children }) => {
+const Notification = ({ status, children }) => {
   return (
     <Notice status={status}>
       <Icon widt="20px" height="20px">
@@ -34,6 +34,8 @@ Notification.propTypes = {
   status: PropTypes.string,
   children: PropTypes.node,
 };
+
+export default Notification;
 
 export const showError = text => toast.error(text);
 

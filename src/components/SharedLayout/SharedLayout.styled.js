@@ -9,10 +9,21 @@ export const Container = styled.div`
 `;
 
 export const Header = styled.header`
+  width: 100%;
+  min-height: 68px;
+  padding-left: 24px;
+  padding-right: 24px;
+  margin-bottom: 16px;
   display: flex;
   justify-content: space-between;
+  /* flex-direction: column; */
   align-items: center;
-  min-height: 80px;
-  margin-bottom: 16px;
-  border-bottom: 1px solid #2a363b;
+  flex-shrink: 0;
+
+  background-color: rgb(50, 165, 207);
+  color: rgb(255, 255, 255);
+  box-shadow: rgb(0 0 0 / 20%) 0px 2px 4px -1px,
+    rgb(0 0 0 / 14%) 0px 4px 5px 0px, rgb(0 0 0 / 12%) 0px 1px 10px 0px;
+
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 `;

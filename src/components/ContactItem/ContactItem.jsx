@@ -1,23 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-  Contact,
-  ContactName,
-  ContactNumber,
-  EditButton,
-  DelButton,
-} from './ContactItem.styled';
-import { Spinner } from 'components/Spinner/Spinner';
-import * as contactsOperations from 'redux/contactsOperations';
-import { getIsLoading } from 'redux/ContactsSelectors';
+import LoadingButton from '@mui/lab/LoadingButton';
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import { Contact, ContactName, ContactNumber } from './ContactItem.styled';
+import * as contactsOperations from 'redux/contacts/contactsOperations';
+import { getIsLoading } from 'redux/contacts/ContactsSelectors';
 import { showWarning } from 'components/Notification/Notification';
-import { Modal } from 'components/Modal/Modal';
 
-export const ContactItem = ({ id, name, number }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const toggleModal = () => setIsModalOpen(state => !state);
-
+const ContactItem = ({ id, name, number }) => {
   const dispatch = useDispatch();
   const isLoading = useSelector(getIsLoading);
 
@@ -37,22 +28,22 @@ export const ContactItem = ({ id, name, number }) => {
     <Contact>
       <ContactName>{name}:</ContactName>
       <ContactNumber>{number}</ContactNumber>
-      <EditButton type="button" onClick={toggleModal} aria-label="Edit contact">
-        Edit
-      </EditButton>
-      <DelButton
+      <LoadingButton
+        sx={{
+          position: 'absolute',
+          right: '5%',
+          top: '50%',
+          transform: 'translate(0, -50%)',
+          fontSize: 12,
+        }}
         type="button"
+        loading={isLoading === id}
         onClick={() => handleDeleteContact(id)}
         aria-label="Delete contact"
+        endIcon={<DeleteForeverOutlinedIcon />}
       >
-        {isLoading === id && <Spinner size={18} />}
         Delete
-      </DelButton>
-      {/* {isModalOpen && (
-        <Modal onClose={toggleModal}>
-          <ContactEditor onSave={toggleModal} />
-        </Modal>
-      )} */}
+      </LoadingButton>
     </Contact>
   );
 };
@@ -62,3 +53,5 @@ ContactItem.propTypes = {
   name: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
 };
+
+export default ContactItem;

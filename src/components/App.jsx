@@ -1,8 +1,10 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useEffect, Suspense, lazy } from 'react';
+import { useEffect, lazy } from 'react';
 import { useDispatch } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 import 'modern-normalize';
+import { ToastContainer, Slide } from 'react-toastify';
+import { GlobalStyle } from 'components/GlobalStyle';
 import SharedLayout from 'components/SharedLayout/SharedLayout';
 import { authOperations } from 'redux/auth';
 import PrivateRoute from './PrivateRoute';
@@ -21,7 +23,7 @@ export const App = () => {
   }, [dispatch]);
 
   return (
-    <Suspense>
+    <>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route
@@ -32,7 +34,6 @@ export const App = () => {
               </PublicRoute>
             }
           />
-
           <Route
             path="/contacts"
             element={
@@ -41,7 +42,6 @@ export const App = () => {
               </PrivateRoute>
             }
           />
-
           <Route
             path="/register"
             element={
@@ -50,7 +50,6 @@ export const App = () => {
               </PublicRoute>
             }
           />
-
           <Route
             path="/login"
             element={
@@ -59,10 +58,12 @@ export const App = () => {
               </PublicRoute>
             }
           />
-
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
-    </Suspense>
+
+      <ToastContainer autoClose={3000} transition={Slide} />
+      <GlobalStyle />
+    </>
   );
 };

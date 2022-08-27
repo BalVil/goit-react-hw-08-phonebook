@@ -5,52 +5,51 @@ const contactsSlice = createSlice({
   name: 'contacts',
   initialState: {
     items: [],
-    isloading: false,
+    isLoading: false,
     error: null,
-    status: 'idle',
   },
   reducers: {
     setIsLoading: (state, _) => {
-      state.isloading = false;
+      state.isLoading = false;
     },
   },
 
   // 'immer' для мутації копію стану
   extraReducers: {
     [getContacts.pending]: (state, _) => {
-      state.isloading = 'fetching';
+      state.isLoading = 'fetching';
     },
     [getContacts.fulfilled]: (state, action) => {
       state.items = action.payload;
-      state.isloading = false;
+      state.isLoading = false;
     },
     [getContacts.rejected]: (state, action) => {
       state.error = action.payload;
-      state.isloading = false;
+      state.isLoading = false;
     },
 
     [deleteContact.pending]: (state, action) => {
-      state.isloading = action.meta.arg;
+      state.isLoading = action.meta.arg;
     },
     [deleteContact.fulfilled]: (state, action) => {
       state.items = state.items.filter(({ id }) => id !== action.payload);
-      state.isloading = false;
+      state.isLoading = false;
     },
     [deleteContact.rejected]: (state, action) => {
       state.error = action.payload;
-      state.isloading = false;
+      state.isLoading = false;
     },
 
     [addContact.pending]: (state, _) => {
-      state.isloading = 'adding';
+      state.isLoading = 'adding';
     },
     [addContact.fulfilled]: (state, action) => {
       state.items.push(action.payload);
-      state.isloading = 'addSuccess';
+      state.isLoading = 'addSuccess';
     },
     [addContact.rejected]: (state, action) => {
       state.error = action.payload;
-      state.isloading = false;
+      state.isLoading = false;
     },
   },
 });

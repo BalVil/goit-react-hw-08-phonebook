@@ -24,7 +24,6 @@ export const GlobalStyle = createGlobalStyle`
   a {
   text-decoration: none;
   font-weight: inherit;
-  font-size: 12px;
   }
   img {
   display: block;

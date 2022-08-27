@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { showWarning, showSuccess } from 'components/Notification/Notification';
-import { contactsActions } from 'redux/contactsSlice';
-import { getItems, getIsLoading } from 'redux/ContactsSelectors';
+import { contactsActions } from 'redux/contacts/contactsSlice';
+import { getItems, getIsLoading } from 'redux/contacts/ContactsSelectors';
 
 export const useAddContact = () => {
   const [inputs, setInputs] = useState({});
 
   const contactsItems = useSelector(getItems);
-  const isloading = useSelector(getIsLoading);
+  const isLoading = useSelector(getIsLoading);
   const dispatch = useDispatch();
 
   const handleChange = e => {
@@ -36,11 +36,11 @@ export const useAddContact = () => {
   };
 
   useEffect(() => {
-    if (isloading === 'addSuccess') {
+    if (isLoading === 'addSuccess') {
       showSuccess('Contact added');
       dispatch(contactsActions.setIsLoading());
     }
-  }, [dispatch, isloading]);
+  }, [dispatch, isLoading]);
 
-  return { inputs, handleChange, handleSubmit, isloading };
+  return { inputs, handleChange, handleSubmit, isLoading };
 };

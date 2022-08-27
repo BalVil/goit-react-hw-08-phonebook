@@ -10,12 +10,12 @@ export const Label = styled.label`
 `;
 
 export const LabelTitle = styled.p`
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 `;
 
 export const FilterInput = styled(DebounceInput)`
   display: block;
-  height: calc(3.5rem + 2px);
+  height: calc(2.5rem + 2px);
   width: 50%;
   margin-bottom: 8px;
   padding: 1rem 0.75rem;

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getItems } from 'redux/ContactsSelectors';
-import * as contactsOperations from 'redux/contactsOperations';
+import { getItems } from 'redux/contacts/ContactsSelectors';
+import * as contactsOperations from 'redux/contacts/contactsOperations';
 
 export const useContactList = () => {
   const [filter, setFilter] = useState('');
