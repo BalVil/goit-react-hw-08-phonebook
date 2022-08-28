@@ -9,7 +9,7 @@ import {
   Input,
   Label,
 } from 'components/ContactForm/ContactForm.styled';
-import { authOperations } from '../redux/auth';
+import { authOperations } from 'redux/auth';
 
 const RegisterPage = () => {
   const [inputs, setInputs] = useState({});
