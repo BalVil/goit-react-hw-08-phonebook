@@ -26,8 +26,6 @@ const RegisterPage = () => {
     e.preventDefault();
 
     dispatch(authOperations.register(inputs));
-
-    setInputs({});
   };
 
   return (

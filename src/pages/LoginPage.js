@@ -25,8 +25,6 @@ const LoginPage = () => {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(authOperations.logIn(inputs));
-
-    setInputs({});
   };
 
   return (

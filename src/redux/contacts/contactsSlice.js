@@ -14,7 +14,6 @@ const contactsSlice = createSlice({
     },
   },
 
-  // 'immer' для мутації копію стану
   extraReducers: {
     [getContacts.pending]: (state, _) => {
       state.isLoading = 'fetching';
